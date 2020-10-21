@@ -23,7 +23,19 @@ namespace SimulaceBanky
         public MainWindow()
         {
             InitializeComponent();
-            
+        }
+
+        private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            TextBlock tbl = sender as TextBlock;
+            if (tbl.Tag is KreditniUcet)
+            {
+                DetailUctu novy = new DetailUctu(tbl.Tag);
+            }
+            else if (tbl.Tag is DepozitniUcet)
+            {
+                DetailUctu novy = new DetailUctu(tbl.Tag);
+            }
         }
     }
 }

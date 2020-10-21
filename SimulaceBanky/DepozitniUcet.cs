@@ -9,11 +9,12 @@ namespace SimulaceBanky
 {
     public class DepozitniUcet
     {
+        public string Jmeno { get; set; }
         public double AktualniCastka { get; set; }
-        double RUM { get; set; }
+        public double RUM { get; set; }
         public List<string> Historie { get; set; }
-        DateTime DatumUveru { get; set; }
-        int DobaSplatnosti { get; set; }
+        public DateTime DatumUveru { get; set; }
+        public int DobaSplatnosti { get; set; }
 
         public DepozitniUcet(double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti)
         {
@@ -47,6 +48,24 @@ namespace SimulaceBanky
 
         }
 
+        public override string ToString()
+        {
+            return $@"Typ účtu: Spořící
+Úročení: {RUM * 100}% za rok
+Omezenost jednorázového výběru: Ne";
+        }
+
+        public string VypisHistorie()
+        {
+            string t = "";
+            foreach (var item in Historie)
+            {
+                t += item + "\n";
+            }
+            return t;
+        }
+
+        
     }
 
     public class StudentskyUcet : DepozitniUcet
@@ -71,6 +90,13 @@ namespace SimulaceBanky
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
+        }
+
+        public override string ToString()
+        {
+            return $@"Typ účtu: Spořící studentský
+Úročení: {RUM * 100}% za rok
+Omezenost jednorázového výběru: Ano - {OmezenostVyberu}";
         }
     }
 }

@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace SimulaceBanky
 {
-    class KreditniUcet
+    public class KreditniUcet
     {
-        double AktualniCastka { get; set; }
-        double PocatecniUver { get; set; }
-        DateTime DatumUveru { get; set; } 
-        int DobaSplatnosti { get; set; } 
-        double RUM { get; set; } 
-        double MinulaCastka { get; set; }
-        
-        List<string> Historie { get; set; }
+        public string Jmeno { get; set; }
+        public double AktualniCastka { get; set; }
+        public double PocatecniUver { get; set; }
+        public DateTime DatumUveru { get; set; }
+        public int DobaSplatnosti { get; set; }
+        public double RUM { get; set; }
+        public double MinulaCastka { get; set; }
+
+        public List<string> Historie { get; set; }
 
         public KreditniUcet(double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti)
         {
@@ -50,6 +51,23 @@ namespace SimulaceBanky
                 Historie.Add(t);
             }
 
+        }
+
+        public override string ToString()
+        {
+            return $@"Typ účtu: Úvěrový
+Úročení: {RUM * 100}% za rok
+Omezenost jednorázového výběru: Ne";
+        }
+
+        public string VypisHistorie()
+        {
+            string t = "";
+            foreach (var item in Historie)
+            {
+                t += item + "\n";
+            }
+            return t;
         }
     }
 }
