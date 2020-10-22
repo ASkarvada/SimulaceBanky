@@ -16,8 +16,9 @@ namespace SimulaceBanky
         public DateTime DatumUveru { get; set; }
         public int DobaSplatnosti { get; set; }
 
-        public DepozitniUcet(double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti)
+        public DepozitniUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti)
         {
+            Jmeno = jmeno;
             AktualniCastka = aktualniCastka;
             RUM = urokZaRok;
             Historie = historie;
@@ -45,7 +46,6 @@ namespace SimulaceBanky
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
-
         }
 
         public override string ToString()
@@ -71,7 +71,7 @@ Omezenost jednorázového výběru: Ne";
     public class StudentskyUcet : DepozitniUcet
     {
         double OmezenostVyberu { get; set; }
-        public StudentskyUcet(double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti, double omezenostVyberu) : base(aktualniCastka, urokZaRok, historie, datumUveru, dobaSplatnoti)
+        public StudentskyUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti, double omezenostVyberu) : base(jmeno, aktualniCastka, urokZaRok, historie, datumUveru, dobaSplatnoti)
         {
             OmezenostVyberu = omezenostVyberu;
         }

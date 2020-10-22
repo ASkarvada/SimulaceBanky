@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimulaceBanky"
         mc:Ignorable="d"
-        Title="PridaniUctu" Height="450" Width="582.377">
+        Title="PridaniUctu" Height="450" Width="582.377" Closing="Window_Closing">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -16,7 +16,7 @@
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Úročení (v % za rok)"/><Run Text=":"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Omezenost výběru:"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,173,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Název účtu"/><Run Text=":"/></TextBlock>
-        <ListBox x:Name="tbl_typ" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="10,65,0,0" VerticalAlignment="Top" Width="267"/>
+        <ListBox x:Name="lb_typ" Grid.Column="1" HorizontalAlignment="Left" Height="28" Margin="10,65,0,0" VerticalAlignment="Top" Width="267"/>
         <TextBox x:Name="tbl_uroceni" HorizontalAlignment="Left" Height="32" Margin="10,98,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="267" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
         <TextBox x:Name="tbl_omezenost" HorizontalAlignment="Left" Height="32" Margin="10,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="267" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
         <TextBox x:Name="tbl_jmeno" HorizontalAlignment="Left" Height="32" Margin="10,172,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="267" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
@@ -25,7 +25,7 @@
         <DatePicker x:Name="dp_do" Grid.Column="1" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="267"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Počáteční úvěr/vklad:"/>
         <TextBox x:Name="tbl_castka" HorizontalAlignment="Left" Height="32" Margin="10,297,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="267" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
-        <Button x:Name="b_vkladVyber" Content="VÝBĚR/VKLAD" HorizontalAlignment="Left" Height="54" Margin="10,355,0,0" VerticalAlignment="Top" Width="357" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click" Grid.ColumnSpan="2"/>
+        <Button x:Name="b_vkladVyber" Content="ZALOŽIT" HorizontalAlignment="Left" Height="54" Margin="10,355,0,0" VerticalAlignment="Top" Width="357" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="85,355,0,0" VerticalAlignment="Top" Width="192" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click" Grid.Column="1"/>
         <TextBlock x:Name="tbl_od" Height="27" Margin="10,220,0,0" TextWrapping="Wrap" Text="21.10.2020" VerticalAlignment="Top" FontFamily="Franklin Gothic Book" FontSize="20" HorizontalAlignment="Left" Width="187" Grid.Column="1"/>
 

@@ -15,3 +15,7 @@ C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\SimulaceBanky.exe
 C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\SimulaceBanky.pdb
 C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\DetailUctu.g.cs
 C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\DetailUctu.baml
+C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\PridaniUctu.g.cs
+C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\VkladVyber.g.cs
+C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\PridaniUctu.baml
+C:\Users\adams\Desktop\Simulace banky\SimulaceBanky\obj\Debug\VkladVyber.baml

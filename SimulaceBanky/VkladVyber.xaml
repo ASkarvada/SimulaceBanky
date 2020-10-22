@@ -15,8 +15,8 @@
         <TextBlock x:Name="tbl_zadejteText" HorizontalAlignment="Left" Height="28" Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Zadejte částku pro výběr:"/>
         <TextBox x:Name="tbl_castkaVyberu" HorizontalAlignment="Left" Height="32" Margin="281,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="223" FontSize="22" FontFamily="Franklin Gothic Book"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="509,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč"/>
-        <Button x:Name="b_vkladVyber" Content="VÝBĚR/VKLAD" HorizontalAlignment="Left" Height="54" Margin="10,283,0,0" VerticalAlignment="Top" Width="348" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click"/>
-        <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="363,283,0,0" VerticalAlignment="Top" Width="182" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click"/>
+        <Button x:Name="b_vkladVyber" Content="VÝBĚR/VKLAD" HorizontalAlignment="Left" Height="54" Margin="10,283,0,0" VerticalAlignment="Top" Width="348" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vkladVyber_Click_1"/>
+        <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="363,283,0,0" VerticalAlignment="Top" Width="182" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Franklin Gothic Medium" FontSize="20" Text="Omezenost výběru:"/>
         <TextBlock x:Name="tbl_omezenost" HorizontalAlignment="Left" Height="28" Margin="186,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontFamily="Franklin Gothic Medium" FontSize="20" Text="Ano - částka / Ne"/>
 

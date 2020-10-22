@@ -23,5 +23,11 @@ namespace SimulaceBanky
         {
             InitializeComponent();
         }
+
+        
+        private void b_vkladVyber_Click_1(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

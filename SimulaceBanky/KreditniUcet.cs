@@ -18,8 +18,9 @@ namespace SimulaceBanky
 
         public List<string> Historie { get; set; }
 
-        public KreditniUcet(double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti)
+        public KreditniUcet(string jmeno, double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti)
         {
+            Jmeno = jmeno;
             AktualniCastka = pocatecniUver;
             PocatecniUver = pocatecniUver; 
             RUM = urokZaRok;
