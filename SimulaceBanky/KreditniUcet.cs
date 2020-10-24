@@ -12,13 +12,14 @@ namespace SimulaceBanky
         public double AktualniCastka { get; set; }
         public double PocatecniUver { get; set; }
         public DateTime DatumUveru { get; set; }
+        public DateTime KonecUveru { get; set; }
         public int DobaSplatnosti { get; set; }
         public double RUM { get; set; }
         public double MinulaCastka { get; set; }
 
         public List<string> Historie { get; set; }
 
-        public KreditniUcet(string jmeno, double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti)
+        public KreditniUcet(string jmeno, double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti, DateTime konecUveru)
         {
             Jmeno = jmeno;
             AktualniCastka = pocatecniUver;
@@ -27,6 +28,7 @@ namespace SimulaceBanky
             Historie = historie;
             MinulaCastka = AktualniCastka; //ošetřit toto
             DatumUveru = datumUveru;
+            KonecUveru = konecUveru;
             DobaSplatnosti = dobaSplatnosti;
         }
 
@@ -41,24 +43,32 @@ namespace SimulaceBanky
         {
             if (vklad)
             {
-                string t = $"vklad*{castka}*{text}*{aktualniDatum}";
+                string t = $"VKLAD*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka += castka;
                 Historie.Add(t);
             }
             else
             {
-                string t = $"vyber*{castka}*{text}*{aktualniDatum}";
+                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
 
         }
 
-        public override string ToString()
+        public string Podrobnosti(DateTime now)
         {
+            int span = (KonecUveru.Month - now.Month) + 12 * (KonecUveru.Year - now.Year);
+            DateTime submitDate = now.AddDays(27);
+
             return $@"Typ účtu: Úvěrový
 Úročení: {RUM * 100}% za rok
-Omezenost jednorázového výběru: Ne";
+Omezenost jednorázového výběru: Ne
+Účet založen: {DatumUveru.Day}.{DatumUveru.Month}.{DatumUveru.Year}
+Doba splatnosti: {DobaSplatnosti} měsíce
+Poslední plánovaná splátka: {KonecUveru.Month}.{KonecUveru.Year}
+Počet zbývajících splátek: {span}
+Následující připsání úroku: 10.{submitDate.Month}.{submitDate.Year}";
         }
 
         public string VypisHistorie()
@@ -66,7 +76,13 @@ Omezenost jednorázového výběru: Ne";
             string t = "";
             foreach (var item in Historie)
             {
-                t += item + "\n";
+                string[] pole = item.Split('*');
+                for (int i = 0; i < pole.Length; i++)
+                {
+                    t += pole[i];
+                    if (i < (pole.Length - 1)) { t += " - "; }
+                }
+                t += "\n";
             }
             return t;
         }

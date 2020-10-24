@@ -5,20 +5,24 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimulaceBanky"
         mc:Ignorable="d"
-        Title="VkladVyber" Height="377.459" Width="562.704">
+        Title="VkladVyber" Height="472.339" Width="562.704">
     <Grid>
         <TextBlock x:Name="tbl_jmeno" HorizontalAlignment="Left" Height="33" Margin="10,10,0,0" TextWrapping="Wrap" Text="Vklad/Výběr" VerticalAlignment="Top" Width="535" FontFamily="Franklin Gothic Demi" FontSize="30" TextAlignment="Center"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Aktuální částka"/><Run Text=" na účtu"/><Run Text=":"/></TextBlock>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Peněz celkem "/><Run Text="v hotovosti:"/></TextBlock>
-        <TextBlock x:Name="tbl_castkaUcet" HorizontalAlignment="Left" Height="28" Margin="283,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontFamily="Franklin Gothic Medium" FontSize="22"/>
-        <TextBlock x:Name="tbl_castkaHotovost" HorizontalAlignment="Left" Height="28" Margin="283,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="262" FontFamily="Franklin Gothic Medium" FontSize="22"/>
+        <TextBlock x:Name="tbl_castkaUcet" HorizontalAlignment="Left" Height="28" Margin="283,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" FontFamily="Franklin Gothic Medium" FontSize="22" TextAlignment="Right"/>
+        <TextBlock x:Name="tbl_castkaHotovost" HorizontalAlignment="Left" Height="28" Margin="283,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="221" FontFamily="Franklin Gothic Medium" FontSize="22" TextAlignment="Right"/>
         <TextBlock x:Name="tbl_zadejteText" HorizontalAlignment="Left" Height="28" Margin="10,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Zadejte částku pro výběr:"/>
-        <TextBox x:Name="tbl_castkaVyberu" HorizontalAlignment="Left" Height="32" Margin="281,163,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="223" FontSize="22" FontFamily="Franklin Gothic Book"/>
-        <TextBlock HorizontalAlignment="Left" Height="28" Margin="509,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč"/>
-        <Button x:Name="b_vkladVyber" Content="VÝBĚR/VKLAD" HorizontalAlignment="Left" Height="54" Margin="10,283,0,0" VerticalAlignment="Top" Width="348" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vkladVyber_Click_1"/>
-        <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="363,283,0,0" VerticalAlignment="Top" Width="182" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16"/>
+        <TextBox x:Name="tbl_castkaVyberu" HorizontalAlignment="Left" Height="32" Margin="281,163,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="223" FontSize="22" FontFamily="Franklin Gothic Book"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="509,165,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč" RenderTransformOrigin="0.475,-1.737"/>
+        <Button x:Name="b_vkladVyber" Content="VÝBĚR/VKLAD" HorizontalAlignment="Left" Height="54" Margin="10,377,0,0" VerticalAlignment="Top" Width="348" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vkladVyber_Click_1"/>
+        <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="363,377,0,0" VerticalAlignment="Top" Width="182" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_zrusit_Click"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="171" FontFamily="Franklin Gothic Medium" FontSize="20" Text="Omezenost výběru:"/>
-        <TextBlock x:Name="tbl_omezenost" HorizontalAlignment="Left" Height="28" Margin="186,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="182" FontFamily="Franklin Gothic Medium" FontSize="20" Text="Ano - částka / Ne"/>
+        <TextBlock x:Name="tbl_omezenost" HorizontalAlignment="Left" Height="66" Margin="186,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="359" FontFamily="Franklin Gothic Medium" FontSize="20" Text="Ano - částka / Ne"/>
+        <TextBlock x:Name="tbl_zadejteText_Copy" HorizontalAlignment="Left" Height="28" Margin="10,271,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="253" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Zadejte poznámku:"/>
+        <TextBox x:Name="tbl_poznamka" HorizontalAlignment="Left" Height="59" Margin="10,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="535" FontSize="18" FontFamily="Franklin Gothic Book"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="509,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč" RenderTransformOrigin="0.475,-1.737"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="509,72,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="36" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč" RenderTransformOrigin="0.475,-1.737"/>
 
     </Grid>
 </Window>

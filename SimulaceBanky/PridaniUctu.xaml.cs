@@ -19,65 +19,103 @@ namespace SimulaceBanky
     /// </summary>
     public partial class PridaniUctu : Window
     {
-        MainWindow mw { get; set; }
+        MainWindow Mw { get; set; }
         public KreditniUcet Ku { get; set; }
         public DepozitniUcet Du { get; set; }
-        public bool Kreditni { get; set; }
-        public bool Closed { get; set; }
+        public StudentskyUcet Su { get; set; }
+        public string Typ { get; set; }
         DateTime Datum { get; set; }
-        Double Penize { get; set; }
 
-        public PridaniUctu(double penize, DateTime datum)
+        public PridaniUctu(DateTime datum, MainWindow mw)
         {
             InitializeComponent();
-            lb_typ.Items.Add("Kreditní");
+            lb_typ.Items.Add("Úvěrový");
             lb_typ.Items.Add("Spořící");
+            lb_typ.Items.Add("Studentský spořící");
             Datum = datum;
-            Penize = penize;
-            Closed = false;
+            tbl_od.Text = $"{Datum.Day}.{Datum.Month}.{Datum.Year}";
+            Mw = mw;
         }
 
         private void b_vklad_Click(object sender, RoutedEventArgs e)
         {
-            DateTime od = Datum;
-            DateTime ddo = dp_do.SelectedDate.Value; 
-
-            if(od > ddo)
+            if (lb_typ.SelectedItem.ToString() == "Úvěrový")
             {
-                MessageBox.Show("Zadejte správně dobu splatnosti!");
-            }
+                DateTime ddo = dp_do.SelectedDate.Value;
 
-            int span = (ddo.Month - od.Month) + 12 * (ddo.Year - od.Year);
+                if (Datum > ddo)
+                {
+                    MessageBox.Show("Zadejte správně dobu splatnosti!");
+                }
 
-            if (lb_typ.SelectedItem.ToString() == "Kreditní")
-            {
-                Ku = new KreditniUcet(tbl_jmeno.Text, Convert.ToDouble(tbl_castka.Text), Convert.ToDouble(tbl_uroceni.Text)/100,new List<string>(), od, span);
-                Kreditni = true;
+                int span = (ddo.Month - Datum.Month) + 12 * (ddo.Year - Datum.Year);
+
+                Ku = new KreditniUcet(tbl_jmeno.Text, Convert.ToDouble(tbl_castka.Text), Convert.ToDouble(tbl_uroceni.Text)/100,new List<string>(), Datum, span, ddo);
+                Typ = "K";
                 MessageBox.Show("Úspěšné založení účtu!", "Úvěrový účet");
-                this.Close();
+                Zavirani(false);
             }
             else if(lb_typ.SelectedItem.ToString() == "Spořící")
             {
-                if(Penize < Convert.ToDouble(tbl_castka.Text))
-                {
-                    MessageBox.Show("Nemáte dostatek prostředků.", "Chyba vkladu");
-                    this.Close();
-                }
-                else
-                {
-                    Du = new DepozitniUcet(tbl_jmeno.Text, Convert.ToDouble(tbl_castka.Text), Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), od, span);
-                    Kreditni = false;
-                    MessageBox.Show("Úspěšné založení účtu!", "Spořící účet");
-                    this.Close();
-                }
-                
+                Du = new DepozitniUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum);
+                Typ = "D";
+                MessageBox.Show("Úspěšné založení účtu!", "Spořící účet");
+                Zavirani(false);
+            }
+            else if (lb_typ.SelectedItem.ToString() == "Studentský spořící")
+            {
+                Su = new StudentskyUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum, Convert.ToDouble(tbl_omezenost.Text));
+                Typ = "S";
+                MessageBox.Show("Úspěšné založení účtu!", "Studentský účet");
+                Zavirani(false);
             }
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        private void Zavirani(bool problem)
         {
-            Closed = true;
-            
+            MainWindow open = Mw;
+            open.Show();
+            if(!problem) open.TvorbaIkonyUctu(this);
+            this.Close();
+        }
+
+        private void lb_typ_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(lb_typ.SelectedItem.ToString() == "Úvěrový")
+            {
+                tbl_omezenost.IsReadOnly = true;
+                tbl_omezenost.Text = "Pouze pro studentský účet";
+                tbl_omezenost.Foreground = Brushes.Gray;
+                tbl_castka.IsReadOnly = false;
+                tbl_castka.Text = "";
+                tbl_castka.Foreground = Brushes.Black;
+                dp_do.IsEnabled = true;
+            }
+            else if (lb_typ.SelectedItem.ToString() == "Spořící")
+            {
+                tbl_omezenost.IsReadOnly = true;
+                tbl_omezenost.Text = "Pouze pro studentský účet";
+                tbl_omezenost.Foreground = Brushes.Gray;
+                tbl_castka.IsReadOnly = true;
+                tbl_castka.Text = "Pouze pro kreditní účet";
+                tbl_castka.Foreground = Brushes.Gray;
+                dp_do.IsEnabled = false;
+            }
+            else if (lb_typ.SelectedItem.ToString() == "Studentský spořící")
+            {
+                tbl_omezenost.IsReadOnly = false;
+                tbl_omezenost.Text = "";
+                tbl_omezenost.Foreground = Brushes.Black;
+                tbl_castka.IsReadOnly = true;
+                tbl_castka.Text = "Pouze pro kreditní účet";
+                tbl_castka.Foreground = Brushes.Gray;
+                dp_do.IsEnabled = false;
+            }
+        }
+
+        private void b_zrusit_Click(object sender, RoutedEventArgs e)
+        {
+            Zavirani(true);
         }
     }
 }

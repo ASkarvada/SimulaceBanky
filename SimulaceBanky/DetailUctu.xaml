@@ -5,16 +5,17 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimulaceBanky"
         mc:Ignorable="d"
-        Title="DetailUctu" Height="450" Width="800">
+        Title="DetailUctu" Height="464" Width="800" Closing="Window_Closing">
     <Grid Background="White">
         <TextBlock x:Name="tbl_jmeno" HorizontalAlignment="Left" Height="33" Margin="10,10,0,0" TextWrapping="Wrap" Text="Spořící účet" VerticalAlignment="Top" Width="772" FontFamily="Franklin Gothic Demi" FontSize="30" TextAlignment="Center"/>
-        <TextBlock x:Name="tbl_popis" HorizontalAlignment="Left" Height="74" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="473" FontFamily="Franklin Gothic Medium" FontSize="16"><Run Text="Typ účtu:"/><LineBreak/><Run Text="Úročení:"/><LineBreak/><Run Text="Omezenost výběru:"/><LineBreak/><Run Text="Od kdy do kdy - "/><Run Text="kolikátá "/><Run Text="splátka"/></TextBlock>
-        <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="173" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Aktuální částka:"/>
-        <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="772" FontFamily="Franklin Gothic Demi Cond" FontSize="22" TextAlignment="Center" Text="Historie vkladů a výběrů"/>
-        <TextBlock x:Name="tbl_historie" HorizontalAlignment="Left" Height="191" Margin="10,218,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="772" FontFamily="Franklin Gothic Medium" FontSize="16"><Run Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad"/><LineBreak/><Run Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad"/><LineBreak/><Run Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad"/><LineBreak/><Run Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad"/><LineBreak/><Run Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad"/></TextBlock>
-        <TextBlock x:Name="tbl_castka" HorizontalAlignment="Left" Height="23" Margin="188,137,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="295" FontFamily="Franklin Gothic Demi Cond" FontSize="20" Text="15000 Kč"/>
-        <Button x:Name="b_vklad" Content="VÝBĚR" HorizontalAlignment="Left" Height="39" Margin="543,54,0,0" VerticalAlignment="Top" Width="239" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="14" Click="b_vklad_Click"/>
-        <Button x:Name="b_vyber" Content="VKLAD" HorizontalAlignment="Left" Height="39" Margin="543,98,0,0" VerticalAlignment="Top" Width="239" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="14" Click="b_vyber_Click"/>
+        <TextBlock x:Name="tbl_popis" HorizontalAlignment="Left" Height="155" Margin="10,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="392" FontFamily="Franklin Gothic Medium" FontSize="16"><Run Text="Typ účtu:"/><LineBreak/><Run Text="Úročení:"/><LineBreak/><Run Text="Omezenost výběru:"/><LineBreak/><Run Text="Od kdy do kdy - "/><Run Text="kolikátá "/><Run Text="splátka"/></TextBlock>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="468,162,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="157" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Aktuální částka:"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,214,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="772" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Historie vkladů"/><Run Text=", "/><Run Text="výběrů"/><Run Text=" a úroků"/><Run Text=":"/></TextBlock>
+        <TextBlock x:Name="tbl_castka" HorizontalAlignment="Left" Height="23" Margin="630,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="123" FontFamily="Franklin Gothic Demi Cond" FontSize="20" Text="15000" TextAlignment="Right"/>
+        <Button x:Name="b_vyber" Content="VÝBĚR" HorizontalAlignment="Left" Height="39" Margin="468,64,0,0" VerticalAlignment="Top" Width="314" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="14" Click="b_vyber_Click"/>
+        <Button x:Name="b_vklad" Content="VKLAD" HorizontalAlignment="Left" Height="39" Margin="468,108,0,0" VerticalAlignment="Top" Width="314" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="14" Click="b_vklad_Click"/>
+        <TextBox x:Name="tbl_historie" HorizontalAlignment="Left" Height="176" Margin="10,247,0,0" TextWrapping="Wrap" Text="21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad&#xD;&#xA;21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad&#xD;&#xA;21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad&#xD;&#xA;21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad&#xD;&#xA;21.10.2020 - vklad - 15000Kč&#x9;Můj první vklad&#xD;&#xA;" VerticalAlignment="Top" Width="772" FontFamily="Franklin Gothic Book" FontSize="16"/>
+        <TextBlock HorizontalAlignment="Left" Height="23" Margin="758,164,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="24" FontFamily="Franklin Gothic Demi Cond" FontSize="20" Text="Kč"/>
 
     </Grid>
 </Window>

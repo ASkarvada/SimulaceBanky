@@ -14,16 +14,14 @@ namespace SimulaceBanky
         public double RUM { get; set; }
         public List<string> Historie { get; set; }
         public DateTime DatumUveru { get; set; }
-        public int DobaSplatnosti { get; set; }
 
-        public DepozitniUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti)
+        public DepozitniUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru)
         {
             Jmeno = jmeno;
             AktualniCastka = aktualniCastka;
             RUM = urokZaRok;
             Historie = historie;
             DatumUveru = datumUveru;
-            DobaSplatnosti = dobaSplatnoti;
         }
 
         public double PricteniUroku()
@@ -32,27 +30,31 @@ namespace SimulaceBanky
             return AktualniCastka * MUM * 0.85;
         }
 
-        public virtual void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)
+        public void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)
         {
             if (vklad)
             {
-                string t = $"vklad*{castka}*{text}*{aktualniDatum}";
+                string t = $"VKLAD*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka += castka;
                 Historie.Add(t);
             }
             else
             {
-                string t = $"vyber*{castka}*{text}*{aktualniDatum}";
+                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
         }
 
-        public override string ToString()
+        public virtual string Podrobnosti(DateTime now)
         {
-            return $@"Typ účtu: Spořící
+            DateTime submitDate = now.AddDays(27);
+
+            return $@"Typ účtu: Spořící studentský
 Úročení: {RUM * 100}% za rok
-Omezenost jednorázového výběru: Ne";
+Omezenost jednorázového výběru: Ne
+Účet založen: {DatumUveru.Day}.{DatumUveru.Month}.{DatumUveru.Year}
+Následující připsání úroku: 10.{submitDate.Month}.{submitDate.Year}";
         }
 
         public string VypisHistorie()
@@ -60,7 +62,13 @@ Omezenost jednorázového výběru: Ne";
             string t = "";
             foreach (var item in Historie)
             {
-                t += item + "\n";
+                string[] pole = item.Split('*');
+                for (int i = 0; i < pole.Length; i++)
+                {
+                    t += pole[i];
+                    if(i < (pole.Length - 1)) { t += " - "; }
+                }
+                t += "\n";
             }
             return t;
         }
@@ -70,33 +78,21 @@ Omezenost jednorázového výběru: Ne";
 
     public class StudentskyUcet : DepozitniUcet
     {
-        double OmezenostVyberu { get; set; }
-        public StudentskyUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnoti, double omezenostVyberu) : base(jmeno, aktualniCastka, urokZaRok, historie, datumUveru, dobaSplatnoti)
+        public double OmezenostVyberu { get; set; }
+        public StudentskyUcet(string jmeno, double aktualniCastka, double urokZaRok, List<string> historie, DateTime datumUveru, double omezenostVyberu) : base(jmeno, aktualniCastka, urokZaRok, historie, datumUveru)
         {
             OmezenostVyberu = omezenostVyberu;
         }
 
-        public override void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)
+        public override string Podrobnosti(DateTime now)
         {
-            if (vklad)
-            {
-                string t = $"vklad*{castka}*{text}*{aktualniDatum}";
-                AktualniCastka += castka;
-                Historie.Add(t);
-            }
-            else
-            {
-                string t = $"vyber*{castka}*{text}*{aktualniDatum}";
-                AktualniCastka -= castka;
-                Historie.Add(t);
-            }
-        }
+            DateTime submitDate = now.AddDays(27);
 
-        public override string ToString()
-        {
             return $@"Typ účtu: Spořící studentský
 Úročení: {RUM * 100}% za rok
-Omezenost jednorázového výběru: Ano - {OmezenostVyberu}";
+Omezenost jednorázového výběru: Ano - {OmezenostVyberu}
+Účet založen: {DatumUveru.Day}.{DatumUveru.Month}.{DatumUveru.Year}
+Následující připsání úroku: 10.{submitDate.Month}.{submitDate.Year}";
         }
     }
 }

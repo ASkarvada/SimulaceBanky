@@ -19,13 +19,12 @@
             <ColumnDefinition Width="231*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="tbl_penize" Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="50,17,0,0" TextWrapping="Wrap" Text="20000" VerticalAlignment="Top" Width="98" FontFamily="Franklin Gothic Demi" FontSize="18" TextAlignment="Right"/>
-        <Button Content="+" Grid.Column="2" HorizontalAlignment="Left" Height="33" Margin="183,9,0,0" VerticalAlignment="Top" Width="38" FontFamily="Franklin Gothic Demi" FontSize="22" Foreground="White" Background="#FF444444"/>
-        <Button Content="-" Grid.Column="2" HorizontalAlignment="Left" Height="33" Margin="7,10,0,0" VerticalAlignment="Top" Width="38" FontFamily="Franklin Gothic Demi" FontSize="22" Foreground="White" Background="#FF444444"/>
+        <Button x:Name="tbl_plus" Content="+" Grid.Column="2" HorizontalAlignment="Left" Height="33" Margin="183,9,0,0" VerticalAlignment="Top" Width="38" FontFamily="Franklin Gothic Demi" FontSize="22" Foreground="White" Background="#FF444444" Click="tbl_plus_Click"/>
+        <Button x:Name="tbl_minus" Content="-" Grid.Column="2" HorizontalAlignment="Left" Height="33" Margin="7,10,0,0" VerticalAlignment="Top" Width="38" FontFamily="Franklin Gothic Demi" FontSize="22" Foreground="White" Background="#FF444444" Click="tbl_minus_Click"/>
         <TextBlock HorizontalAlignment="Left" Height="33" Margin="10,9,0,0" TextWrapping="Wrap" Text="Uživatelský přehled" VerticalAlignment="Top" Width="330" FontFamily="Franklin Gothic Demi" FontSize="30" TextAlignment="Center" Grid.Column="1" RenderTransformOrigin="0.3,0.295"/>
         <TextBlock x:Name="tbl_datum" Height="27" Margin="10,16,0,10" TextWrapping="Wrap" Text="21.10.2020" VerticalAlignment="Top" FontFamily="Franklin Gothic Book" FontSize="20" HorizontalAlignment="Left" Width="187"/>
         <StackPanel x:Name="st" HorizontalAlignment="Left" Height="364" Margin="10,68,0,0" VerticalAlignment="Top" Width="776" Grid.ColumnSpan="3">
             <Button x:Name="b_add" Content="Založit účet" Margin="0, 0, 0, 10" Background="#FF444444" FontFamily="Franklin Gothic Medium" FontSize="22" Foreground="White" Click="Button_Click" Height="30"/>
-            <TextBlock x:Name="tb_1" HorizontalAlignment="Left" TextWrapping="Wrap" Width="776" FontFamily="Franklin Gothic Demi" FontSize="22" Background="#FFFBD87A" MouseLeftButtonUp="TextBlock_MouseLeftButtonUp" Height="50"><Run Text="Spořící účet&#x9;"/><Run Text="&#x9;"/><Run FontFamily="Franklin Gothic Book" Text="Aktuální částka: 15000Kč"/><Run FontFamily="Franklin Gothic Book" Text="&#x9;"/><Run FontFamily="Franklin Gothic Book" Text="&#x9;&#x9;"/><Run FontFamily="Franklin Gothic Medium" Text="DETAIL"/></TextBlock>
         </StackPanel>
         <TextBlock Grid.Column="2" HorizontalAlignment="Left" Height="20" Margin="148,17,0,0" TextWrapping="Wrap" Text="Kč" VerticalAlignment="Top" Width="25" FontFamily="Franklin Gothic Demi" FontSize="18" TextAlignment="Center"/>
     </Grid>
