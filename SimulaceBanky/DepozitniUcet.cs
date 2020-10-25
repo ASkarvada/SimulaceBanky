@@ -24,23 +24,24 @@ namespace SimulaceBanky
             DatumUveru = datumUveru;
         }
 
-        public double PricteniUroku()
+        public void PricteniUroku()
         {
             double MUM = RUM / 12;
-            return AktualniCastka * MUM * 0.85;
+            AktualniCastka += AktualniCastka * MUM * 0.85;
+            AktualniCastka = Math.Round(AktualniCastka, 2);
         }
 
         public void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)
         {
             if (vklad)
             {
-                string t = $"VKLAD*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
+                string t = $"VKLAD*{aktualniDatum.ToString("dd.MM.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka += castka;
                 Historie.Add(t);
             }
             else
             {
-                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
+                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.MM.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
@@ -50,7 +51,7 @@ namespace SimulaceBanky
         {
             DateTime submitDate = now.AddDays(27);
 
-            return $@"Typ účtu: Spořící studentský
+            return $@"Typ účtu: Spořící
 Úročení: {RUM * 100}% za rok
 Omezenost jednorázového výběru: Ne
 Účet založen: {DatumUveru.Day}.{DatumUveru.Month}.{DatumUveru.Year}
@@ -90,7 +91,7 @@ Následující připsání úroku: 10.{submitDate.Month}.{submitDate.Year}";
 
             return $@"Typ účtu: Spořící studentský
 Úročení: {RUM * 100}% za rok
-Omezenost jednorázového výběru: Ano - {OmezenostVyberu}
+Omezenost jednorázového výběru: Ano - {OmezenostVyberu}Kč
 Účet založen: {DatumUveru.Day}.{DatumUveru.Month}.{DatumUveru.Year}
 Následující připsání úroku: 10.{submitDate.Month}.{submitDate.Year}";
         }

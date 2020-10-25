@@ -31,18 +31,23 @@ namespace SimulaceBanky
             tbl_castkaHotovost.Text = d.Penize.ToString();
             tbl_castkaUcet.Text = d.tbl_castka.Text;
 
-            if (vklad)
-            { tbl_jmeno.Text = "Vklad"; b_vkladVyber.Content = "Provést vklad"; }
-            else { tbl_jmeno.Text = "Výběr"; b_vkladVyber.Content = "Provést výběr"; }
-
             if (d.StaryTag is StudentskyUcet)
             {
-                tbl_omezenost.Text = d.Su.OmezenostVyberu.ToString();
+                tbl_omezenost.Text = d.Su.OmezenostVyberu.ToString() + "Kč";
+            }
+            else if(d.StaryTag is KreditniUcet)
+            {
+                tbl_castkaUcet.Text = (d.Ku.PocatecniUver + d.Ku.AktualniCastka).ToString();
+                tbl_omezenost.Text = "Omezenost úvěrem";
             }
             else
             {
                 tbl_omezenost.Text = "Omezenost zůstatkem";
             }
+
+            if (vklad)
+            { tbl_jmeno.Text = "Vklad"; b_vkladVyber.Content = "Provést vklad"; }
+            else { tbl_jmeno.Text = "Výběr"; b_vkladVyber.Content = "Provést výběr"; }
         }
 
         
@@ -63,6 +68,7 @@ namespace SimulaceBanky
                     }
                     else if (D.StaryTag is KreditniUcet)
                     {
+
                         D.Penize -= Convert.ToDouble(tbl_castkaVyberu.Text);
                         D.Ku.PraceSUctem(true, Convert.ToDouble(tbl_castkaVyberu.Text), tbl_poznamka.Text, D.Now);
                         MessageBox.Show($"Úspěšně jste vložili {Convert.ToDouble(tbl_castkaVyberu.Text)}Kč", "Potvrzení vkladu");
@@ -101,7 +107,7 @@ namespace SimulaceBanky
                         }
                         else
                         {
-                            MessageBox.Show($"Váš účet má nastavenou omezenost na {D.Su.OmezenostVyberu}, nemůžete vybírat více", "Chyba");
+                            MessageBox.Show($"Váš účet má nastavenou omezenost na {D.Su.OmezenostVyberu}Kč, nemůžete vybírat více", "Chyba");
                         }
                         
                     }

@@ -32,20 +32,22 @@ namespace SimulaceBanky
             InitializeComponent();
             tbl_historie.IsReadOnly = true;
 
-            
-
             Mw = mw;
             Now = now;
             Penize = penize;
             StaryTag = tag;
 
-            if(tag is DepozitniUcet)
+            if(tag is DepozitniUcet && !(tag is StudentskyUcet))
             {
                 Dp = (DepozitniUcet)tag;
                 tbl_castka.Text = Dp.AktualniCastka.ToString();
                 tbl_jmeno.Text = Dp.Jmeno;
                 tbl_popis.Text = Dp.Podrobnosti(Now);
                 tbl_historie.Text = Dp.VypisHistorie();
+                tbl_moznostCastka.Text = "";
+                tbl_moznostText.Text = "";
+                tbl_moznostText2.Text = "";
+                b_zrusit.Visibility = Visibility.Visible;
             }
             else if(tag is KreditniUcet)
             {
@@ -54,6 +56,11 @@ namespace SimulaceBanky
                 tbl_jmeno.Text = Ku.Jmeno;
                 tbl_popis.Text = Ku.Podrobnosti(Now);
                 tbl_historie.Text = Ku.VypisHistorie();
+                tbl_moznostCastka.Text = Math.Abs(Ku.PocatecniUver).ToString();
+                tbl_moznostText.Text = "Možnost výběru:";
+                tbl_moznostText2.Text = "Kč";
+                if(Ku.AktualniCastka < 0) b_zrusit.Visibility = Visibility.Hidden;
+                else b_zrusit.Visibility = Visibility.Visible;
             }
             else if (tag is StudentskyUcet)
             {
@@ -62,6 +69,10 @@ namespace SimulaceBanky
                 tbl_jmeno.Text = Su.Jmeno;
                 tbl_popis.Text = Su.Podrobnosti(Now);
                 tbl_historie.Text = Su.VypisHistorie();
+                tbl_moznostCastka.Text = "";
+                tbl_moznostText.Text = "";
+                tbl_moznostText2.Text = "";
+                b_zrusit.Visibility = Visibility.Visible;
             }
             
             
@@ -71,10 +82,15 @@ namespace SimulaceBanky
         {
             if(t == "D")
             {
+                Dp = (DepozitniUcet)StaryTag;
                 tbl_castka.Text = Dp.AktualniCastka.ToString();
                 tbl_jmeno.Text = Dp.Jmeno;
                 tbl_popis.Text = Dp.Podrobnosti(Now);
                 tbl_historie.Text = Dp.VypisHistorie();
+                tbl_moznostCastka.Text = "";
+                tbl_moznostText.Text = "";
+                tbl_moznostText2.Text = "";
+                b_zrusit.Visibility = Visibility.Visible;
             }
             else if(t == "K")
             {
@@ -83,6 +99,11 @@ namespace SimulaceBanky
                 tbl_jmeno.Text = Ku.Jmeno;
                 tbl_popis.Text = Ku.Podrobnosti(Now);
                 tbl_historie.Text = Ku.VypisHistorie();
+                tbl_moznostCastka.Text = Math.Abs(Ku.PocatecniUver + Ku.AktualniCastka).ToString();
+                tbl_moznostText.Text = "Možnost výběru:";
+                tbl_moznostText2.Text = "Kč";
+                if (Ku.AktualniCastka < 0) b_zrusit.Visibility = Visibility.Hidden;
+                else b_zrusit.Visibility = Visibility.Visible;
             }
             else if (t == "S")
             {
@@ -91,6 +112,10 @@ namespace SimulaceBanky
                 tbl_jmeno.Text = Su.Jmeno;
                 tbl_popis.Text = Su.Podrobnosti(Now);
                 tbl_historie.Text = Su.VypisHistorie();
+                tbl_moznostCastka.Text = "";
+                tbl_moznostText.Text = "";
+                tbl_moznostText2.Text = "";
+                b_zrusit.Visibility = Visibility.Visible;
             }
 
             
@@ -114,6 +139,36 @@ namespace SimulaceBanky
             open.Show();
             open.Penize = Penize;
             open.AktualizaceIkonyUctu(Ku, Dp, Su, StaryTag);
+        }
+
+        private void b_zrusit_Click(object sender, RoutedEventArgs e)
+        {
+            if (StaryTag is DepozitniUcet && !(StaryTag is StudentskyUcet))
+            {
+                Dp = (DepozitniUcet)StaryTag;
+                Dp.PraceSUctem(false, Dp.AktualniCastka, "Zrušení účtu", Now);
+                Penize += Dp.AktualniCastka;
+                MessageBox.Show($"Zrušení účtu proběhlo úspěšně, vracíme Vám {Dp.AktualniCastka}Kč");
+            }
+            else if (StaryTag is KreditniUcet)
+            {
+                Ku = (KreditniUcet)StaryTag;
+                Ku.PraceSUctem(false, Ku.AktualniCastka, "Zrušení účtu", Now);
+                Penize += Ku.AktualniCastka;
+                MessageBox.Show($"Zrušení účtu proběhlo úspěšně, vracíme Vám {Ku.AktualniCastka}Kč");
+            }
+            else if (StaryTag is StudentskyUcet)
+            {
+                Su = (StudentskyUcet)StaryTag;
+                Su.PraceSUctem(false, Su.AktualniCastka, "Zrušení účtu", Now);
+                Penize += Su.AktualniCastka;
+                MessageBox.Show($"Zrušení účtu proběhlo úspěšně, vracíme Vám {Su.AktualniCastka}Kč");
+            }
+            MainWindow open = Mw;
+            open.Show();
+            open.Penize = Penize;
+            open.SmazatUcet(StaryTag);
+            this.Close();
         }
     }
 }

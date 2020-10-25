@@ -24,10 +24,11 @@
         <TextBlock x:Name="tbl_textDo" HorizontalAlignment="Left" Height="28" Margin="10,250,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Do:"/>
         <DatePicker x:Name="dp_do" Grid.Column="1" HorizontalAlignment="Left" Margin="10,254,0,0" VerticalAlignment="Top" Width="267" Focusable = "True" IsEnabled="True"/>
         <TextBlock HorizontalAlignment="Left" Height="28" Margin="10,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontFamily="Franklin Gothic Demi Cond" FontSize="22"><Run Text="Velikost úvěru"/><Run Text=":"/></TextBlock>
-        <TextBox x:Name="tbl_castka" HorizontalAlignment="Left" Height="32" Margin="10,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
+        <TextBox x:Name="tbl_castka" HorizontalAlignment="Left" Height="32" Margin="10,297,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="218" FontSize="22" FontFamily="Franklin Gothic Book" Grid.Column="1"/>
         <Button x:Name="b_vkladVyber" Content="ZALOŽIT" HorizontalAlignment="Left" Height="54" Margin="10,355,0,0" VerticalAlignment="Top" Width="357" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_vklad_Click" Grid.ColumnSpan="2"/>
         <Button x:Name="b_zrusit" Content="ZRUŠIT" HorizontalAlignment="Left" Height="54" Margin="85,355,0,0" VerticalAlignment="Top" Width="192" Background="#FF444444" Foreground="White" FontFamily="Franklin Gothic Medium" FontSize="16" Click="b_zrusit_Click" Grid.Column="1"/>
         <TextBlock x:Name="tbl_od" Height="27" Margin="10,220,0,0" TextWrapping="Wrap" Text="21.10.2020" VerticalAlignment="Top" FontFamily="Franklin Gothic Book" FontSize="20" HorizontalAlignment="Left" Width="187" Grid.Column="1"/>
+        <TextBlock HorizontalAlignment="Left" Height="28" Margin="233,299,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="44" FontFamily="Franklin Gothic Demi Cond" FontSize="22" Text="Kč" Grid.Column="1"/>
 
     </Grid>
 </Window>

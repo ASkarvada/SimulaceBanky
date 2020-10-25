@@ -41,11 +41,14 @@ namespace SimulaceBanky
         {
             if (lb_typ.SelectedItem.ToString() == "Úvěrový")
             {
-                DateTime ddo = dp_do.SelectedDate.Value;
+                DateTime ddo = new DateTime();
+                try { ddo = dp_do.SelectedDate.Value; }
+                catch { MessageBox.Show("Zadejte dobu splatnosti!", "Prázdné pole"); return; }
 
                 if (Datum > ddo)
                 {
                     MessageBox.Show("Zadejte správně dobu splatnosti!");
+                    return;
                 }
 
                 int span = (ddo.Month - Datum.Month) + 12 * (ddo.Year - Datum.Year);
@@ -75,7 +78,8 @@ namespace SimulaceBanky
         {
             MainWindow open = Mw;
             open.Show();
-            if(!problem) open.TvorbaIkonyUctu(this);
+            if (!problem) open.TvorbaIkonyUctu(this);
+            else open.Timmy.Start();
             this.Close();
         }
 

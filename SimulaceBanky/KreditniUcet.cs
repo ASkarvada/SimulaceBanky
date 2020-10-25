@@ -22,34 +22,34 @@ namespace SimulaceBanky
         public KreditniUcet(string jmeno, double pocatecniUver, double urokZaRok, List<string> historie, DateTime datumUveru, int dobaSplatnosti, DateTime konecUveru)
         {
             Jmeno = jmeno;
-            AktualniCastka = pocatecniUver;
+            AktualniCastka = 0;
             PocatecniUver = pocatecniUver; 
             RUM = urokZaRok;
             Historie = historie;
-            MinulaCastka = AktualniCastka; //ošetřit toto
+            MinulaCastka = pocatecniUver;
             DatumUveru = datumUveru;
             KonecUveru = konecUveru;
             DobaSplatnosti = dobaSplatnosti;
         }
 
-        public double OdecteniUroku() 
+        public void OdecteniUroku() 
         {
             double MUM =  RUM / 12;
-            MinulaCastka = MinulaCastka * MUM * 0.85;
-            return MinulaCastka;
+            AktualniCastka -= Math.Abs(AktualniCastka) * MUM * 0.85;
+            AktualniCastka = Math.Round(AktualniCastka);
         }
 
         public void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)
         {
             if (vklad)
             {
-                string t = $"VKLAD*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
+                string t = $"VKLAD*{aktualniDatum.ToString("dd.MM.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka += castka;
                 Historie.Add(t);
             }
             else
             {
-                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.m.yyyy")}*{castka}Kč*{text}";
+                string t = $"VÝBĚR*{aktualniDatum.ToString("dd.MM.yyyy")}*{castka}Kč*{text}";
                 AktualniCastka -= castka;
                 Historie.Add(t);
             }
