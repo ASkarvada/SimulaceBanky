@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimulaceBanky"
         mc:Ignorable="d"
-        Title="MainWindow" Height="473.361" Width="803.689">
+        Title="MainWindow" IsEnabled="True" Height="473.361" Width="803.689" Closing="Window_Closing">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">

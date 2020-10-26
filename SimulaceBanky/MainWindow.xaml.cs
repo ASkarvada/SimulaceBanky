@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -16,6 +17,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace SimulaceBanky
 {
@@ -32,6 +35,7 @@ namespace SimulaceBanky
         public MainWindow()
         {
             InitializeComponent();
+
             ID = 0;
             Datum = DateTime.Now;
             tbl_datum.Text = Datum.ToString("dd.MM.yyyy");
@@ -52,6 +56,7 @@ namespace SimulaceBanky
 
         private void Urokovani()
         {
+            bool zurokovano = false;
             foreach (UIElement control in st.Children)
             {
                 if (control.GetType() == typeof(TextBlock))
@@ -78,10 +83,11 @@ namespace SimulaceBanky
                         su.PricteniUroku();
                     }
                     AktualizaceIkonyUctu(ku, du, su, tb.Tag);
+                    zurokovano = true;
                 }
             }
             tbl_penize.Text = Penize.ToString();
-            MessageBox.Show("Byli Vám připsány úroky", "Splátkové období");
+            if(zurokovano)MessageBox.Show("Byli Vám připsány úroky", "Splátkové období");
         }
 
         private void TextBlock_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -112,8 +118,6 @@ namespace SimulaceBanky
             PridaniUctu novy = new PridaniUctu(Datum, this);
             novy.Show();
         }
-
-        
 
         public void TvorbaIkonyUctu(PridaniUctu novy)
         {
@@ -237,5 +241,13 @@ namespace SimulaceBanky
             tbl_datum.Text = Datum.ToString("dd.MM.yyyy");
             if (Datum.Day == 10) Urokovani();
         }
+
+        private void Window_Closing(object sender, CancelEventArgs e)
+        {
+            
+        }
+        
+
+        
     }
 }

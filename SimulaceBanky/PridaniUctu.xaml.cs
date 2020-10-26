@@ -41,37 +41,135 @@ namespace SimulaceBanky
         {
             if (lb_typ.SelectedItem.ToString() == "Úvěrový")
             {
-                DateTime ddo = new DateTime();
-                try { ddo = dp_do.SelectedDate.Value; }
-                catch { MessageBox.Show("Zadejte dobu splatnosti!", "Prázdné pole"); return; }
-
-                if (Datum > ddo)
+                if (OhlidaniChyb("U"))
                 {
-                    MessageBox.Show("Zadejte správně dobu splatnosti!");
-                    return;
+                    DateTime ddo = dp_do.SelectedDate.Value;
+                    int span = (ddo.Month - Datum.Month) + 12 * (ddo.Year - Datum.Year);
+
+                    Ku = new KreditniUcet(tbl_jmeno.Text, Convert.ToDouble(tbl_castka.Text), Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum, span, ddo);
+                    Typ = "K";
+                    MessageBox.Show("Úspěšné založení účtu!", "Úvěrový účet");
+                    Zavirani(false);
                 }
-
-                int span = (ddo.Month - Datum.Month) + 12 * (ddo.Year - Datum.Year);
-
-                Ku = new KreditniUcet(tbl_jmeno.Text, Convert.ToDouble(tbl_castka.Text), Convert.ToDouble(tbl_uroceni.Text)/100,new List<string>(), Datum, span, ddo);
-                Typ = "K";
-                MessageBox.Show("Úspěšné založení účtu!", "Úvěrový účet");
-                Zavirani(false);
+                else return;
             }
             else if(lb_typ.SelectedItem.ToString() == "Spořící")
             {
-                Du = new DepozitniUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum);
-                Typ = "D";
-                MessageBox.Show("Úspěšné založení účtu!", "Spořící účet");
-                Zavirani(false);
+                if (OhlidaniChyb("D"))
+                {
+                    Du = new DepozitniUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum);
+                    Typ = "D";
+                    MessageBox.Show("Úspěšné založení účtu!", "Spořící účet");
+                    Zavirani(false);
+                }
+                else return;
             }
             else if (lb_typ.SelectedItem.ToString() == "Studentský spořící")
             {
-                Su = new StudentskyUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum, Convert.ToDouble(tbl_omezenost.Text));
-                Typ = "S";
-                MessageBox.Show("Úspěšné založení účtu!", "Studentský účet");
-                Zavirani(false);
+                if (OhlidaniChyb("S"))
+                {
+                    Su = new StudentskyUcet(tbl_jmeno.Text, 0, Convert.ToDouble(tbl_uroceni.Text) / 100, new List<string>(), Datum, Convert.ToDouble(tbl_omezenost.Text));
+                    Typ = "S";
+                    MessageBox.Show("Úspěšné založení účtu!", "Studentský účet");
+                    Zavirani(false);
+                }
+                else return;
             }
+        }
+
+        private bool OhlidaniChyb(string typ)
+        {
+            if(typ == "U")
+            {
+                DateTime ddo = new DateTime();
+                try { ddo = dp_do.SelectedDate.Value; }
+                catch { MessageBox.Show("Zadejte dobu splatnosti!", "Prázdné pole"); return false; }
+                if (Datum > ddo)
+                {
+                    MessageBox.Show("Zadejte správně dobu splatnosti!");
+                    return false;
+                }
+                try
+                {
+                    Convert.ToDouble(tbl_uroceni.Text);
+                    if (Convert.ToDouble(tbl_uroceni.Text) <= 0)
+                    {
+                        MessageBox.Show("Zadejte kladné úročení!", "Chyba");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Zadejte úročení ve správném formátu!", "Chyba");
+                    return false;
+                }
+                try
+                {
+                    Convert.ToDouble(tbl_castka.Text);
+                    if (Convert.ToDouble(tbl_castka.Text) <= 0)
+                    {
+                        MessageBox.Show("Zadejte kladnou částku!", "Chyba");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Zadejte částku ve správném formátu!", "Chyba");
+                    return false;
+                }
+                return true;
+            }
+            else if (typ == "D")
+            {
+                try
+                {
+                    Convert.ToDouble(tbl_uroceni.Text);
+                    if (Convert.ToDouble(tbl_uroceni.Text) <= 0)
+                    {
+                        MessageBox.Show("Zadejte kladné úročení!", "Chyba");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Zadejte úročení ve správném formátu!", "Chyba");
+                    return false;
+                }
+                return true;
+            }
+            else if(typ == "S")
+            {
+                try
+                {
+                    Convert.ToDouble(tbl_omezenost.Text);
+                    if (Convert.ToDouble(tbl_omezenost.Text) <= 0)
+                    {
+                        MessageBox.Show("Zadejte kladnou omezenost jednorázového výběru!", "Chyba");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Zadejte omezenost jednorázového výběru ve správném formátu!", "Chyba");
+                    return false;
+                }
+                try
+                {
+                    Convert.ToDouble(tbl_uroceni.Text);
+                    if (Convert.ToDouble(tbl_uroceni.Text) <= 0)
+                    {
+                        MessageBox.Show("Zadejte kladné úročení!", "Chyba");
+                        return false;
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show("Zadejte úročení ve správném formátu!", "Chyba");
+                    return false;
+                }
+                return true;
+            }
+            return false;
         }
 
         private void Zavirani(bool problem)

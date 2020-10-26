@@ -15,7 +15,7 @@ namespace SimulaceBanky
         public DateTime KonecUveru { get; set; }
         public int DobaSplatnosti { get; set; }
         public double RUM { get; set; }
-        public double MinulaCastka { get; set; }
+        public int Nesplatky { get; set; }
 
         public List<string> Historie { get; set; }
 
@@ -26,7 +26,7 @@ namespace SimulaceBanky
             PocatecniUver = pocatecniUver; 
             RUM = urokZaRok;
             Historie = historie;
-            MinulaCastka = pocatecniUver;
+            Nesplatky = 1;
             DatumUveru = datumUveru;
             KonecUveru = konecUveru;
             DobaSplatnosti = dobaSplatnosti;
@@ -35,8 +35,17 @@ namespace SimulaceBanky
         public void OdecteniUroku() 
         {
             double MUM =  RUM / 12;
-            AktualniCastka -= Math.Abs(AktualniCastka) * MUM * 0.85;
-            AktualniCastka = Math.Round(AktualniCastka);
+            if(PocatecniUver + AktualniCastka <= 0)
+            {
+                AktualniCastka -= Math.Abs(AktualniCastka) * MUM * Nesplatky * 0.85;
+                Nesplatky++;
+            }
+            else
+            {
+                AktualniCastka -= Math.Abs(AktualniCastka) * MUM * 0.85;
+                Nesplatky = 0;
+            }
+            AktualniCastka = Math.Round(AktualniCastka, 2);
         }
 
         public void PraceSUctem(bool vklad, double castka, string text, DateTime aktualniDatum)

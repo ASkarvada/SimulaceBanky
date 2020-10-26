@@ -53,6 +53,21 @@ namespace SimulaceBanky
         
         private void b_vkladVyber_Click_1(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                Convert.ToDouble(tbl_castkaVyberu.Text);
+                if (Convert.ToDouble(tbl_castkaVyberu.Text) <= 0)
+                {
+                    MessageBox.Show("Zadejte kladnou částku!", "Chyba");
+                    return;
+                }
+            }
+            catch
+            {
+                MessageBox.Show("Zadejte částku ve správném formátu!", "Chyba");
+                return;
+            }
+
             if (Vklad)
             {
                 if (Convert.ToDouble(tbl_castkaHotovost.Text) >= Convert.ToDouble(tbl_castkaVyberu.Text))
